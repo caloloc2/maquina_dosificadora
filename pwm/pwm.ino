@@ -1,6 +1,6 @@
 int ena_pin = 12;
 int dir_pin = 11;
-int pul_pin = 9;
+int pul_pin = 7;
 
 void setup() {
   // put your setup code here, to run once:
@@ -12,12 +12,13 @@ void setup() {
   digitalWrite(dir_pin, LOW); // ALTO IZQUIERDA / BAJO DERECHA
 }
 
-int tiempo = 5; // 1.5 // 5
+int tiempo = 1000; // 1.5 // 5200
 
 void loop() {
+//  tiempo = map(analogRead(0), 0, 1023, 10, 1000);
   // put your main code here, to run repeatedly:
   digitalWrite(pul_pin, HIGH);
-  delay(tiempo);
+  delayMicroseconds(tiempo);
   digitalWrite(pul_pin, LOW);
-  delay(tiempo);  
+  delayMicroseconds(tiempo);
 }

@@ -18,14 +18,10 @@ int inicio = 0;
 int modo = 0; // 0: pedal, 1: manual
 
 void setup(){
-  pinMode(10, OUTPUT);
-  pinMode(9, OUTPUT);
-//  TCCR1A=0b01010000;
-//  TCCR1B=0b00011011;
   TCCR1A=0b00010000;
   TCCR1B=0b00011011;
   TCCR1C=0;
-  ICR1=0;
+  ICR1=500;
   
   pinMode(iniciar, INPUT_PULLUP);
   pinMode(modo_detener, INPUT_PULLUP);
@@ -75,9 +71,8 @@ void LCD_Textos(){
   lcd.setCursor(5, 1);
   lcd.print("    ");
   lcd.setCursor(5, 1);
-  lcd.print(velocidad);
-//  lcd.print((300-(velocidad-150))/10);
-//  lcd.print(map(velocidad, 75, 100, 40, 2)); // 0.007 - 2280 ml/min => 0 - 40 ml/s
+//  lcd.print(velocidad);
+  lcd.print(map(velocidad, 65, 160, 15, 5));
   lcd.setCursor(9, 1);
   lcd.print("ml/s");
 }
@@ -95,7 +90,7 @@ void cambiar_modo(){
 }
 
 void loop(){
-    velocidad = map(analogRead(pot), 0, 1023, 1, 100); // 29, 50    // 100, 450    // 100 - 3000
+    velocidad = map(analogRead(pot), 0, 1023, 65, 160);
     LCD_Textos();
 
     if (inicio==1){
